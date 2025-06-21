@@ -1,0 +1,28 @@
+# Bytecode и временные файлы
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.log
+*.sqlite3
+
+# Виртуальное окружение
+.venv/
+
+# Переменные окружения и ключи
+.env
+.env.*
+private.pem
+public.pem
+
+# PyCharm
+.idea/
+
+# Тестовые/временные файлы
+*.tmp
+*.bak
+*.swp
+
+# Папки pytest/cache и mypy
+.mypy_cache/
+.pytest_cache/
