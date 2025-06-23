@@ -14,6 +14,7 @@ class Event(Base):
     description: Mapped[str] = mapped_column(String(1000))
     date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     location: Mapped[str] = mapped_column(String(300), nullable=False)
+    # attribute jr teg for interests
 
     feedback: Mapped[list["UserEventFeedback"]] = relationship(
         back_populates="event",

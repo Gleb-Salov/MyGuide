@@ -11,3 +11,4 @@ pydantic_settings
 psycopg2-binary
 asyncpg
 email-validator
+starlette

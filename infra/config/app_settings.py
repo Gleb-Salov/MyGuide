@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     POSTGRES_DB: Optional[str] = None
     POSTGRES_USER: Optional[str] = None
     POSTGRES_HOST: Optional[str] = None
+    JWT_PRIVATE_KEY_PATH: Optional[str] = None
+    JWT_PUBLIC_KEY_PATH: Optional[str] = None
 
     @property
     def database_url(self) -> str:
