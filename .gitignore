@@ -12,8 +12,8 @@ __pycache__/
 # Переменные окружения и ключи
 .env
 .env.*
-private.pem
-public.pem
+private_key.pem
+public_key.pem
 
 # PyCharm
 .idea/
