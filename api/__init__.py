@@ -1,5 +1,6 @@
-from .v1 import users_router
+from .v1 import users_router, auth_router
 
 __all__ = [
-    "users_router"
+    "users_router",
+    "auth_router"
 ]

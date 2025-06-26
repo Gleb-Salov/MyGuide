@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from sqlalchemy.dialects.postgresql import UUID
 from infra.config.app_settings import settings
 from functools import lru_cache
 from jose import jwt, JWTError
@@ -31,11 +32,11 @@ class JWTHandler:
             self._public_key = f.read()
 
 
-    def create_jwt(self, user_id: str) -> str:
+    def create_jwt(self, user_id: UUID) -> str:
         headers = {"alg": self.algorithm,
                    "typ": "JWT"}
         payload = {
-            "sub": user_id,
+            "sub": str(user_id),
             "iat": datetime.now(timezone.utc),
             "exp": datetime.now(timezone.utc) + timedelta(minutes=self.expire_minutes),
         }

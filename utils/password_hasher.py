@@ -12,7 +12,6 @@ async def verify_password(plain_password: str, hashed_password: str) -> bool:
     return await run_in_threadpool(pwd_context.verify, plain_password, hashed_password)
 
 
-
 async def test():
     test_password = "<PASSWORD>"
     hashed_test_password = await hash_password(test_password)

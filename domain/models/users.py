@@ -11,7 +11,7 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    username: Mapped[str] = mapped_column(String(50), nullable=False)
+    username: Mapped[str] = mapped_column(String(50), nullable=False, unique=True, index=True)
     email: Mapped[str] = mapped_column(String(254), nullable=False, unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String, nullable=False)
     create_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, server_default=func.now())
@@ -41,6 +41,12 @@ class Interest(Base):
     users: Mapped[list[User]] = relationship(
         "User",
         secondary="user_interest_association",
+        back_populates="interests",
+    )
+
+    events: Mapped[list["Event"]] = relationship( # type: ignore
+        "Event",
+        secondary="event_interest_association",
         back_populates="interests",
     )
 

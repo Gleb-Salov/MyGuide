@@ -9,6 +9,10 @@ class UserBase(BaseModel):
     email: EmailStr = Field(min_length=3, max_length=254)
 
 
+class InterestAdd(BaseModel):
+    name: str = Field(min_length=1, max_length=50)
+
+
 class InterestRead(BaseModel):
     name: str
     id: int
@@ -18,6 +22,10 @@ class InterestRead(BaseModel):
 
 class UserCreate(UserBase):
     password: constr(min_length=8, max_length=64)
+
+
+class UserLogin(UserCreate):
+    pass
 
 
 class UserRead(UserBase):

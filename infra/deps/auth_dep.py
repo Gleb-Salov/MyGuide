@@ -11,7 +11,8 @@ from fastapi import Depends
 from uuid import UUID
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login") for prod
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login-swagger")
 
 async def get_current_user(
         token: str = Depends(oauth2_scheme),
