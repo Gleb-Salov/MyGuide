@@ -12,3 +12,6 @@ psycopg2-binary
 asyncpg
 email-validator
 starlette
+httpx
+beautifulsoup4
+lxml

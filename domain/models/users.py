@@ -1,10 +1,11 @@
 from sqlalchemy import Integer, String, Table, Column, DateTime, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, backref
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from infra.db.base import Base
 from datetime import datetime
 from uuid import uuid4
+from typing import Optional
 
 
 class User(Base):
@@ -20,7 +21,7 @@ class User(Base):
         "Interest",
         secondary="user_interest_association",
         back_populates="users",
-        lazy="joined",
+        lazy="selectin",
     )
 
     feedback: Mapped[list["UserEventFeedback"]] = relationship( # type: ignore
@@ -37,6 +38,14 @@ class Interest(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+
+    parent_id: Mapped[Optional[int]] = mapped_column(ForeignKey("interests.id"), nullable=True)
+
+    parent: Mapped[Optional["Interest"]] = relationship(
+        "Interest",
+        remote_side=[id],
+        backref=backref("children", cascade="all, delete-orphan")
+    )
 
     users: Mapped[list[User]] = relationship(
         "User",

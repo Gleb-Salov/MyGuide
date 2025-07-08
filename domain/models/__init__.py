@@ -1,4 +1,4 @@
-from .event import Event, UserEventFeedback
+from .event import Event, UserEventFeedback, EventDateLocation
 from .users import User, Interest
 
 __all__ = [
@@ -6,4 +6,5 @@ __all__ = [
     "UserEventFeedback",
     "User",
     "Interest",
+    "EventDateLocation",
 ]

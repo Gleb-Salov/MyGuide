@@ -12,34 +12,33 @@ from uuid import UUID
 
 
 class UserCRUD:
-
     def __init__(self, session: AsyncSession):
         self.session = session
 
     async def get_user_by_email(self, email: EmailStr) -> Optional[User]:
         stmt = select(User).where(User.email == email)
         result = await self.session.execute(stmt)
-        return result.unique().scalar_one_or_none()
+        return result.unique().scalars().one_or_none()
 
     async def get_user_by_id(self, user_id: UUID) -> Optional[User]:
         stmt = select(User).where(User.id == user_id)
         result = await self.session.execute(stmt)
-        return result.unique().scalar_one_or_none()
+        return result.unique().scalars().one_or_none()
 
     async def get_user_by_username(self, username: str) -> Optional[User]:
         stmt = select(User).where(User.username == username)
         result = await self.session.execute(stmt)
-        return result.unique().scalar_one_or_none()
+        return result.unique().scalars().one_or_none()
 
     async def get_user_with_interests(self, user_id: UUID) -> Optional[User]:
         stmt = select(User).options(selectinload(User.interests)).where(User.id == user_id)
         result = await self.session.execute(stmt)
-        return result.unique().scalar_one_or_none()
+        return result.unique().scalars().one_or_none()
 
     async def get_interest_by_name(self, interest_name: str) -> Optional[Interest]:
         smth = select(Interest).where(Interest.name.ilike(interest_name))
         result = await self.session.execute(smth)
-        return result.unique().scalar_one_or_none()
+        return result.unique().scalars().one_or_none()
 
     async def create_user(self, user: UserCreate) -> UserRead:
         existing_user_email = await self.get_user_by_email(user.email)
